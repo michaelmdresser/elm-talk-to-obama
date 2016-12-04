@@ -58,8 +58,7 @@ view model =
   div []
     [ h2 [] [text "Obama || Markov"]
     , button [ onClick NextQuote ] [ text "Next Quote" ]
-    , br [] []
-    , h3 [] [text model.quote]
+    , text model.quote
     ]
 
 
@@ -77,10 +76,10 @@ subscriptions model =
 getNextQuote : Cmd Msg
 getNextQuote =
   let
-    url =
+    addr =
       "talk-to-obama.herokuapp.com/chat?size=tweet"
   in
-    Http.send NewQuote (Http.get url decodeQuoteUrl)
+    Http.send NewQuote (Http.get addr decodeQuoteUrl)
 
 
 decodeQuoteUrl : Decode.Decoder String
