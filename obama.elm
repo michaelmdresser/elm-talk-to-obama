@@ -2,7 +2,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http
-import Json.Decode as Json exposing(Decoder)
+import Json.Decode as Decode
 
 main =
     Html.program
@@ -31,19 +31,23 @@ init topic =
 -- UPDATE
 
 
-type Msg = FetchContent | ContentReceived
+type Msg = FetchContent | ContentReceived (Result Http.Error String)
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
         FetchContent ->
             (model, Http.send ContentReceived contentRequest)
-        ContentReceived response -> -- process response
-            case response of
-                Ok resp ->
-                    (response, Cmd.none)
-                Err error ->
-                    ("error", Cmd.none)
+        ContentReceived (Ok content) -> -- process response
+            (content, Cmd.none)
+        ContentReceived (Err _) ->
+            ("error", Cmd.none)
+            
+           -- case response of
+           --     Ok resp ->
+           --         (response, Cmd.none)
+           --     Err error ->
+           --         ("error", Cmd.none)
 
 
 
@@ -55,7 +59,7 @@ view model =
     div []
         [ h2 [] [text "Obama || Markov"]
         , button [ onClick FetchContent ] [ text "Next Quote" ]
-        , div [] [text model.quote]
+        , div [] [text model]
         ]
 
 
@@ -95,6 +99,6 @@ contentRequest =
 --contentDecoder : Json.Decode.field "content" Json.Decode.string
 --contentDecoder =
 
-contentDecoder : Decoder String
+contentDecoder : Decode.Decoder String
 contentDecoder =
-    Decoder.at ["content"] Decoder.string
+    Decode.at ["content"] Decode.string
