@@ -2,15 +2,15 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http
-import Json.Decode exposing (Decoder)
+import Json.Decode as Json exposing(Decoder)
 
 main =
-  Html.program
-    { init = init ""
-    , view = view
-    , update = update
-    , subscriptions = subscriptions
-    }
+    Html.program
+        { init = init ""
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        }
 
 
 -- MODEL
@@ -22,9 +22,9 @@ type alias Model =
 
 init : String -> (Model, Cmd Msg)
 init topic =
-  ( ""
-  , Cmd.none
-  )
+    ( "hello"
+    , Cmd.none
+    )
 
 
 
@@ -35,11 +35,15 @@ type Msg = FetchContent | ContentReceived
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
-  case msg of
-    FetchContent ->
-        (model, Http.send ContentReceived contentRequest)
-    ContentReceived response -> -- process response
-        (response, Cmd.none)
+    case msg of
+        FetchContent ->
+            (model, Http.send ContentReceived contentRequest)
+        ContentReceived response -> -- process response
+            case response of
+                OK resp ->
+                    (response, Cmd.none)
+                Err error ->
+                    ("error", Cmd.none)
 
 
 
@@ -48,11 +52,11 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ h2 [] [text "Obama || Markov"]
-    , button [ onClick FetchContent ] [ text "Next Quote" ]
-    , div [] [text model.quote]
-    ]
+    div []
+        [ h2 [] [text "Obama || Markov"]
+        , button [ onClick FetchContent ] [ text "Next Quote" ]
+        , div [] [text model.quote]
+        ]
 
 
 -- SUBSCRIPTIONS
@@ -60,7 +64,7 @@ view model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  Sub.none
+    Sub.none
 
 
 -- HTTP
@@ -82,7 +86,7 @@ subscriptions model =
 
 contentRequest : Http.Request String
 contentRequest =
-  Http.get "talk-to-obama.herokuapp.com/chat?size=tweet" contentDecoder
+    Http.get "talk-to-obama.herokuapp.com/chat?size=tweet" contentDecoder
 
 
 
@@ -93,4 +97,4 @@ contentRequest =
 
 contentDecoder : Decoder String
 contentDecoder =
-  Decoder.at ["content"] Decoder.string
+    Decoder.at ["content"] Decoder.string
