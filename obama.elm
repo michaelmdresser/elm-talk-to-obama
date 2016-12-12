@@ -40,7 +40,7 @@ update msg model =
             (model, Http.send ContentReceived contentRequest)
         ContentReceived response -> -- process response
             case response of
-                OK resp ->
+                Ok resp ->
                     (response, Cmd.none)
                 Err error ->
                     ("error", Cmd.none)
