@@ -28,7 +28,7 @@ type alias Model =
 
 init : String -> (Model, Cmd Msg)
 init topic =
-    ( "hello"
+    ( ""
     , Cmd.none
     )
 
@@ -55,15 +55,15 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [ styles [Css.textAlign Css.center]]
+    div [ styles [Css.textAlign Css.center, Css.width (Css.pct 50), Css.margin Css.auto]]
         [ h2 
-            [styles [ Css.width (Css.pct 50.0), Css.margin Css.auto]] 
+            []
             [text "Obama || Markov"]
         , button 
-            [ styles [ Css.width (Css.pct 20.0), Css.margin Css.auto ]
-                , onClick FetchContent ] 
+            [ onClick FetchContent ] 
             [ text "Next Quote" ]
         , div [] [text model]
+        , br [] []
         , div [] [
             text "This is a simple page written in Elm to pull data from the webservice at "
             , a [href "https://talk-to-obama.herokuapp.com/chat"] [ text "talk-to-obama.herokuapp.com/chat" ]
