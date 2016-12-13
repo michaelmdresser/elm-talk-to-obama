@@ -6,7 +6,7 @@ var _michaelmdresser$elm_talk_to_obama$Main$contentDecoder = A2(
 		_1: {ctor: '[]'}
 	},
 	_elm_lang$core$Json_Decode$string);
-var _michaelmdresser$elm_talk_to_obama$Main$contentRequest = A2(_elm_lang$http$Http$get, 'talk-to-obama.herokuapp.com/chat?size=tweet', _michaelmdresser$elm_talk_to_obama$Main$contentDecoder);
+var _michaelmdresser$elm_talk_to_obama$Main$contentRequest = A2(_elm_lang$http$Http$get, 'https://talk-to-obama.herokuapp.com/chat?size=tweet', _michaelmdresser$elm_talk_to_obama$Main$contentDecoder);
 var _michaelmdresser$elm_talk_to_obama$Main$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$none;
 };
