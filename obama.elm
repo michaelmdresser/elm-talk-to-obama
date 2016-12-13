@@ -43,13 +43,6 @@ update msg model =
         ContentReceived (Err _) ->
             ("error", Cmd.none)
 
-           -- case response of
-           --     Ok resp ->
-           --         (response, Cmd.none)
-           --     Err error ->
-           --         ("error", Cmd.none)
-
-
 
 -- VIEW
 
@@ -74,30 +67,10 @@ subscriptions model =
 -- HTTP
 
 
---getNextQuote : Cmd Msg
---getNextQuote =
---  let
---    addr =
---      "talk-to-obama.herokuapp.com/chat?size=tweet"
---  in
---    Http.send NewQuote (Http.get addr decodeQuoteUrl)
-
-
---decodeQuoteUrl : Decode.Decoder String
---decodeQuoteUrl =
---  Decode.at ["content"] Decode.string
-
-
 contentRequest : Http.Request String
 contentRequest =
     Http.get "https://talk-to-obama.herokuapp.com/chat?size=tweet" contentDecoder
 
-
-
-
-
---contentDecoder : Json.Decode.field "content" Json.Decode.string
---contentDecoder =
 
 contentDecoder : Decode.Decoder String
 contentDecoder =
