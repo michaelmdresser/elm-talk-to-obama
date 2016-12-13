@@ -13,21 +13,25 @@ var _michaelmdresser$elm_talk_to_obama$Main$subscriptions = function (model) {
 var _michaelmdresser$elm_talk_to_obama$Main$init = function (topic) {
 	return {ctor: '_Tuple2', _0: 'hello', _1: _elm_lang$core$Platform_Cmd$none};
 };
+var _michaelmdresser$elm_talk_to_obama$Main$styles = function (_p0) {
+	return _elm_lang$html$Html_Attributes$style(
+		_rtfeldman$elm_css$Css$asPairs(_p0));
+};
 var _michaelmdresser$elm_talk_to_obama$Main$ContentReceived = function (a) {
 	return {ctor: 'ContentReceived', _0: a};
 };
 var _michaelmdresser$elm_talk_to_obama$Main$update = F2(
 	function (msg, model) {
-		var _p0 = msg;
-		if (_p0.ctor === 'FetchContent') {
+		var _p1 = msg;
+		if (_p1.ctor === 'FetchContent') {
 			return {
 				ctor: '_Tuple2',
 				_0: model,
 				_1: A2(_elm_lang$http$Http$send, _michaelmdresser$elm_talk_to_obama$Main$ContentReceived, _michaelmdresser$elm_talk_to_obama$Main$contentRequest)
 			};
 		} else {
-			if (_p0._0.ctor === 'Ok') {
-				return {ctor: '_Tuple2', _0: _p0._0._0, _1: _elm_lang$core$Platform_Cmd$none};
+			if (_p1._0.ctor === 'Ok') {
+				return {ctor: '_Tuple2', _0: _p1._0._0, _1: _elm_lang$core$Platform_Cmd$none};
 			} else {
 				return {ctor: '_Tuple2', _0: 'error', _1: _elm_lang$core$Platform_Cmd$none};
 			}
@@ -37,12 +41,35 @@ var _michaelmdresser$elm_talk_to_obama$Main$FetchContent = {ctor: 'FetchContent'
 var _michaelmdresser$elm_talk_to_obama$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _michaelmdresser$elm_talk_to_obama$Main$styles(
+				{
+					ctor: '::',
+					_0: _rtfeldman$elm_css$Css$textAlign(_rtfeldman$elm_css$Css$center),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: A2(
 				_elm_lang$html$Html$h2,
-				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _michaelmdresser$elm_talk_to_obama$Main$styles(
+						{
+							ctor: '::',
+							_0: _rtfeldman$elm_css$Css$width(
+								_rtfeldman$elm_css$Css$pct(50.0)),
+							_1: {
+								ctor: '::',
+								_0: _rtfeldman$elm_css$Css$margin(_rtfeldman$elm_css$Css$auto),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				},
 				{
 					ctor: '::',
 					_0: _elm_lang$html$Html$text('Obama || Markov'),
@@ -54,8 +81,22 @@ var _michaelmdresser$elm_talk_to_obama$Main$view = function (model) {
 					_elm_lang$html$Html$button,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(_michaelmdresser$elm_talk_to_obama$Main$FetchContent),
-						_1: {ctor: '[]'}
+						_0: _michaelmdresser$elm_talk_to_obama$Main$styles(
+							{
+								ctor: '::',
+								_0: _rtfeldman$elm_css$Css$width(
+									_rtfeldman$elm_css$Css$pct(20.0)),
+								_1: {
+									ctor: '::',
+									_0: _rtfeldman$elm_css$Css$margin(_rtfeldman$elm_css$Css$auto),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(_michaelmdresser$elm_talk_to_obama$Main$FetchContent),
+							_1: {ctor: '[]'}
+						}
 					},
 					{
 						ctor: '::',
@@ -72,7 +113,56 @@ var _michaelmdresser$elm_talk_to_obama$Main$view = function (model) {
 							_0: _elm_lang$html$Html$text(model),
 							_1: {ctor: '[]'}
 						}),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('This is a simple page written in Elm to pull data from the webservice at '),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$a,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$href('https://talk-to-obama.herokuapp.com/chat'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('talk-to-obama.herokuapp.com/chat'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(' created from '),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$a,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$href('https://github.com/krrishd/talk-to-obama'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('krrishd\'s talk-to-obama'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('.'),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
 				}
 			}
 		});
