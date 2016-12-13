@@ -3,6 +3,12 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http
 import Json.Decode as Decode
+import Css
+
+
+styles =
+    Css.asPairs >> Html.Attributes.style
+
 
 main =
     Html.program
@@ -50,8 +56,8 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ h2 [] [text "Obama || Markov"]
-        , button [ onClick FetchContent ] [ text "Next Quote" ]
+        [ h2 [styles [ Css.width (Css.pct 50.0), Css.margin Css.auto, Css.textAlign Css.center]] [text "Obama || Markov"]
+        , button [ styles [ Css.width (Css.pct 20.0), Css.margin Css.auto, Css.textAlign Css.center ], onClick FetchContent ] [ text "Next Quote" ]
         , div [] [text model]
         ]
 
