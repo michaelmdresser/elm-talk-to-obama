@@ -55,11 +55,24 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ h2 [styles [ Css.width (Css.pct 50.0), Css.margin Css.auto, Css.textAlign Css.center]] [text "Obama || Markov"]
-        , button [ styles [ Css.width (Css.pct 20.0), Css.margin Css.auto, Css.textAlign Css.center ], onClick FetchContent ] [ text "Next Quote" ]
+    div [ styles [Css.textAlign Css.center]]
+        [ h2 
+            [styles [ Css.width (Css.pct 50.0), Css.margin Css.auto]] 
+            [text "Obama || Markov"]
+        , button 
+            [ styles [ Css.width (Css.pct 20.0), Css.margin Css.auto ]
+                , onClick FetchContent ] 
+            [ text "Next Quote" ]
         , div [] [text model]
+        , div [] [
+            text "This is a simple page written in Elm to pull data from the webservice at "
+            , a [href "https://talk-to-obama.herokuapp.com/chat"] [ text "talk-to-obama.herokuapp.com/chat" ]
+            , text " created from "
+            , a [href "https://github.com/krrishd/talk-to-obama"] [ text "krrishd's talk-to-obama"]
+            , text "."
+            ]
         ]
+        
 
 
 -- SUBSCRIPTIONS
