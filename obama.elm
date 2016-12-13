@@ -42,7 +42,7 @@ update msg model =
             (content, Cmd.none)
         ContentReceived (Err _) ->
             ("error", Cmd.none)
-            
+
            -- case response of
            --     Ok resp ->
            --         (response, Cmd.none)
@@ -90,7 +90,7 @@ subscriptions model =
 
 contentRequest : Http.Request String
 contentRequest =
-    Http.get "talk-to-obama.herokuapp.com/chat?size=tweet" contentDecoder
+    Http.get "https://talk-to-obama.herokuapp.com/chat?size=tweet" contentDecoder
 
 
 
